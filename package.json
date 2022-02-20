@@ -1,9 +1,9 @@
 {
-  "name": "node-ts-starter",
+  "name": "backend-ts-crud",
   "version": "1.0.0",
   "private": true,
-  "description": "my backend ts starter",
-  "main": "index.js",
+  "description": "NodeJS setup for my React Application",
+  "main": "/src/index.ts",
   "author": "pHoeniX-svg",
   "license": "MIT",
   "engines": {
