@@ -6,7 +6,11 @@
   "main": "index.js",
   "author": "pHoeniX-svg",
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
+    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
     "start:dev": "nodemon",
     "dev": "nodemon src/index.ts",
     "test": "jest",
