@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { User } from '~src/model';
+import { User } from '~server/model';
 
 const handleLogout: RequestHandler = async (req, res) => {
   // on client side, also delete the access token

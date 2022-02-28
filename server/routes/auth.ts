@@ -1,8 +1,8 @@
 import express from 'express';
-import { handleRefreshToken } from '~src/controllers';
+import { handleLogin } from '~server/controllers';
 
 const router = express.Router();
 
-router.get('/', handleRefreshToken);
+router.post('/', handleLogin);
 
 module.exports = router;

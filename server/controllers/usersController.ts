@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { User } from '~src/model';
+import { User } from '~server/model';
 
 /**
  * METHOD: GET => Get All Users

@@ -1,26 +1,18 @@
 {
-  "name": "backend-ts-crud",
+  "name": "server-ts-crud",
   "version": "1.0.0",
   "private": true,
   "description": "NodeJS setup for my React Application",
-  "main": "/src/index.ts",
+  "main": "/server/index.ts",
   "author": "pHoeniX-svg",
   "license": "MIT",
   "engines": {
     "node": "16.x"
   },
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
-    "start:dev": "nodemon",
-    "dev": "nodemon src/index.ts",
-    "test": "jest",
-    "test:unit": "jest unit",
-    "test:int": "jest int",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
-    "clean:build": "rm -rf ./dist",
-    "tsc:build": "tsc --project tsconfig.prod.json",
-    "build": "yarn clean:build && yarn tsc:build"
+    "start": "ts-node -r tsconfig-paths/register ./server/index.ts",
+    "dev": "nodemon",
+    "tsc:build": "tsc --project tsconfig.prod.json"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

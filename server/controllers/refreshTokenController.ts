@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
-import { User } from '~src/model';
-import { IUser } from '~src/types';
+import { User } from '~server/model';
+import { IUser } from '~server/types';
 
 const handleRefreshToken: RequestHandler = async (req, res) => {
   const cookies = req.cookies;

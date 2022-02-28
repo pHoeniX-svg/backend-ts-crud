@@ -1,6 +1,6 @@
 import { Request, RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
-import { IUser, TUser } from '~src/types';
+import { IUser, TUser } from '~server/types';
 
 const verifyJWT: RequestHandler = (req: unknown, res, next) => {
   let request = req as Request & TUser;

@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { allowedOrigins } from '~src/config';
+import { allowedOrigins } from '~server/config';
 
 const credentials: RequestHandler = (req, res, next) => {
   const origin = req.headers.origin!;

@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { RequestHandler } from 'express';
-import { User } from '~src/model';
-import { IUser } from '~src/types';
+import { User } from '~server/model';
+import { IUser } from '~server/types';
 
 const handleRegisterNewUser: RequestHandler = async (req, res) => {
   const { user, pwd } = req.body;

@@ -20,10 +20,10 @@
     "baseUrl": ".",
     "outDir": "dist",
     "paths": {
-      "~src/*": ["src/*"]
+      "~server/*": ["server/*"]
     },
     "forceConsistentCasingInFileNames": true
   },
   "exclude": ["node_modules", "dist", "coverage"],
-  "include": ["src"]
+  "include": ["server"]
 }

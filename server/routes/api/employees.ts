@@ -1,13 +1,13 @@
 import express from 'express';
-import { ROLES_LIST } from '~src/config';
+import { ROLES_LIST } from '~server/config';
 import {
   createNewEmployee,
   deleteEmployee,
   getAllEmployees,
   getEmployee,
   updateEmployee,
-} from '~src/controllers';
-import { verifyRoles } from '~src/middleware';
+} from '~server/controllers';
+import { verifyRoles } from '~server/middleware';
 
 const router = express.Router();
 

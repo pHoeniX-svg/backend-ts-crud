@@ -1,7 +1,7 @@
 import express from 'express';
-import { ROLES_LIST } from '~src/config';
-import { deleteUser, getAllUsers, getUser } from '~src/controllers';
-import { verifyRoles } from '~src/middleware';
+import { ROLES_LIST } from '~server/config';
+import { deleteUser, getAllUsers, getUser } from '~server/controllers';
+import { verifyRoles } from '~server/middleware';
 
 const router = express.Router();
 

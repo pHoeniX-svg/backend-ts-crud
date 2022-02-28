@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import { Employee } from '~src/model';
-import { IUser } from '~src/types';
+import { Employee } from '~server/model';
+import { IUser } from '~server/types';
 
 /**
  * METHOD: GET => Get All Employees

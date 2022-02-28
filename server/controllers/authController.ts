@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
-import { User } from '~src/model';
+import { User } from '~server/model';
 
 const handleLogin: RequestHandler = async (req, res) => {
   const { user, pwd } = req.body;
