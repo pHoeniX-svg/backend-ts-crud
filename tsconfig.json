@@ -9,10 +9,6 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "noEmit": false,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noImplicitReturns": true,
     "removeComments": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
@@ -24,6 +20,6 @@
     },
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "dist", "coverage"],
+  "exclude": ["node_modules", "dist", "coverage", "client"],
   "include": ["server"]
 }

@@ -3,7 +3,9 @@ import { Employee } from '~server/model';
 import { IUser } from '~server/types';
 
 /**
- * METHOD: GET => Get All Employees
+ * @desc   Get All Employees
+ * @route  GET /api/employees
+ * @access Private
  */
 const getAllEmployees: RequestHandler = async (_req, res) => {
   const employees = await Employee.find();
@@ -13,7 +15,9 @@ const getAllEmployees: RequestHandler = async (_req, res) => {
 };
 
 /**
- * METHOD: GET => Get Single Employee
+ * @desc   Get Single Employee
+ * @route  GET /api/employees/:id
+ * @access Private
  */
 const getEmployee: RequestHandler = async (req, res) => {
   const request = req as unknown as Request & {
@@ -21,7 +25,7 @@ const getEmployee: RequestHandler = async (req, res) => {
   };
 
   if (!request?.params?.id) {
-    return res.status(400).json({ message: 'Employee ID is required' });
+    return res.status(400).json({ message: 'an employee id is required' });
   }
 
   const employee = await Employee.findOne({
@@ -38,7 +42,9 @@ const getEmployee: RequestHandler = async (req, res) => {
 };
 
 /**
- * METHOD: POST => Create Employee
+ * @desc   Create An Employee
+ * @route  POST /api/employees/
+ * @access Private
  */
 const createNewEmployee: RequestHandler = async (req: unknown, res) => {
   const request = req as Request & {
@@ -46,7 +52,9 @@ const createNewEmployee: RequestHandler = async (req: unknown, res) => {
   };
 
   if (!request?.body?.firstname || !request?.body?.lastname) {
-    return res.status(400).json({ message: 'first and last names required' });
+    return res
+      .status(400)
+      .json({ message: 'first and last names are required' });
   }
   try {
     const result: Promise<IUser> = await Employee.create({
@@ -61,7 +69,9 @@ const createNewEmployee: RequestHandler = async (req: unknown, res) => {
 };
 
 /**
- * METHOD: PUT => Update Employee
+ * @desc   Update An Employee
+ * @route  PUT /api/employees/
+ * @access Private
  */
 const updateEmployee: RequestHandler = async (req: unknown, res) => {
   const request = req as Request & {
@@ -69,7 +79,7 @@ const updateEmployee: RequestHandler = async (req: unknown, res) => {
   };
 
   if (!request?.body?.id) {
-    return res.status(400).json({ message: 'ID parameter is required' });
+    return res.status(400).json({ message: 'an id parameter is required' });
   }
 
   const employee = await Employee.findOne({
@@ -79,7 +89,7 @@ const updateEmployee: RequestHandler = async (req: unknown, res) => {
   if (!employee) {
     return res
       .status(204)
-      .json({ message: `No employee matches ID ${request.body.id}.` });
+      .json({ message: `no employee matches the id ${request.body.id}.` });
   }
 
   if (request.body?.firstname) {
@@ -95,7 +105,9 @@ const updateEmployee: RequestHandler = async (req: unknown, res) => {
 };
 
 /**
- * METHOD: DELETE => Delete an Employee
+ * @desc   Delete An Employee
+ * @route  DELETE /api/employees/
+ * @access Private
  */
 const deleteEmployee: RequestHandler = async (req, res) => {
   const request = req as unknown as Request & {
@@ -103,7 +115,7 @@ const deleteEmployee: RequestHandler = async (req, res) => {
   };
 
   if (!request?.body?.id) {
-    return res.status(400).json({ message: 'Employee ID is required' });
+    return res.status(400).json({ message: 'employee id is required' });
   }
 
   const employee = await Employee.findOne({
@@ -113,7 +125,7 @@ const deleteEmployee: RequestHandler = async (req, res) => {
   if (!employee) {
     return res
       .status(204)
-      .json({ message: `No employee matches ID ${request.body.id}.` });
+      .json({ message: `no employee matches the id ${request.body.id}.` });
   }
 
   const result = await employee.deleteOne({ _id: request.body.id });

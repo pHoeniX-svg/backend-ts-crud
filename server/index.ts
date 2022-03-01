@@ -1,3 +1,4 @@
+import colors from 'colors';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv-safe';
@@ -61,7 +62,10 @@ app.all('*', (req, res) => {
 app.use(errorHandler);
 
 mongoose.connection.once('open', () => {
-  console.log(`Connected to MongoDB: ${mongoose.connection.host}`);
+  console.log(colors.enabled);
+  console.log(
+    `Connected to MongoDB: ${mongoose.connection.host}`.cyan.underline
+  );
   app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
   });

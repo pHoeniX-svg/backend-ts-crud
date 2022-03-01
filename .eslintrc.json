@@ -19,19 +19,25 @@
   },
   "plugins": ["@typescript-eslint", "jest", "prettier", "import"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["off", { "usePrettierrc": true }],
     "no-console": "off",
     "import/extensions": "off",
     "import/no-unresolved": "error",
     "import/prefer-default-export": "off",
     "import/no-default-export": "error",
     "import/order": [
-      "error",
+      "warn",
       {
         "newlines-between": "never",
         "groups": [
-          ["builtin", " external"],
-          ["internal", "parent", "sibling", "index"]
+          [
+            ["builtin"], // Built-in types are first
+            ["sibling", "parent"], // Then sibling and parent types. They can be mingled together
+            "index", // Then the index file
+            ["object", "type"],
+            // Then the rest: internal and external type
+            ["internal", "external"]
+          ]
         ]
       }
     ],
