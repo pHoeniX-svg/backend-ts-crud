@@ -16,7 +16,7 @@ router
   .get(getAllEmployees)
   .post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), createNewEmployee)
   .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), updateEmployee)
-  .delete(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), deleteEmployee);
+  .delete(verifyRoles(ROLES_LIST.Admin), deleteEmployee);
 
 router.route('/:id').get(getEmployee);
 

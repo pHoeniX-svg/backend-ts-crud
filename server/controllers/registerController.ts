@@ -26,7 +26,7 @@ const handleRegisterNewUser: RequestHandler = async (req, res) => {
 
   try {
     // encrypt the password
-    const hashedPwd = await bcrypt.hash(pwd, 16);
+    const hashedPwd = await bcrypt.hash(pwd, 10);
 
     // create and store the new user
     const result: Promise<IUser> = await User.create({

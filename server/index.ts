@@ -18,7 +18,7 @@ connectDB();
 //custom middleware logger
 app.use(logger);
 
-// handle oprions credentials check - before CORS!!
+// handle options credentials check - before CORS!!
 // and fetch cookies credentials requirement
 app.use(credentials);
 
@@ -35,9 +35,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 // serve static files from the public directory
-app.use(express.static(path.join(__dirname, '/public')));
+app.use('/', express.static(path.join(__dirname, '/public')));
 
-// routes
+// routes => maybe change to /api/*
 app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));

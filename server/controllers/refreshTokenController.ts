@@ -3,6 +3,11 @@ import jwt from 'jsonwebtoken';
 import { User } from '~server/model';
 import { IUser } from '~server/types';
 
+/**
+ * @desc   Get Refresh Token
+ * @route  GET /api/refresh
+ * @access Private
+ */
 const handleRefreshToken: RequestHandler = async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(401); // unauthorized
