@@ -92,11 +92,11 @@ const updateEmployee: RequestHandler = async (req: unknown, res) => {
       .json({ message: `no employee matches the id ${request.body.id}.` });
   }
 
-  if (request.body?.firstname) {
+  if (request?.body?.firstname) {
     employee.firstname = request.body.firstname;
   }
 
-  if (request.body?.lastname) {
+  if (request?.body?.lastname) {
     employee.lastname = request.body.lastname;
   }
 

@@ -3,6 +3,11 @@ import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 import { User } from '~server/model';
 
+/**
+ * @desc   Authenticate A User
+ * @route  POST /api/auth
+ * @access Public
+ */
 const handleLogin: RequestHandler = async (req, res) => {
   const { user, pwd } = req.body;
 

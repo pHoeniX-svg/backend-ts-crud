@@ -3,14 +3,20 @@ import { RequestHandler } from 'express';
 import { User } from '~server/model';
 import { IUser } from '~server/types';
 
+/**
+ * @desc   Create A User
+ * @route  POST /api/register
+ * @access Public
+ */
 const handleRegisterNewUser: RequestHandler = async (req, res) => {
-  const { user, pwd } = req.body;
+  const { user, pwd } = req.body as Request & { user: string; pwd: string };
 
   if (!user || !pwd) {
     return res
       .status(400)
       .json({ message: 'username and password are required' });
   }
+
   //check for duplicate usernames in db
   const duplicate = await User.findOne({ username: user }).exec();
 
