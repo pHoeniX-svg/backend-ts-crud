@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import { IUser } from '~server/types';
 const { Schema } = mongoose;
 
-const schema = new Schema({
+const schema = new Schema<IUser>({
   username: {
     type: String,
     required: true,
@@ -21,6 +22,6 @@ const schema = new Schema({
   refreshToken: String,
 });
 
-const User = mongoose.model('User', schema);
+const User = mongoose.model<IUser>('User', schema);
 
 export { User };

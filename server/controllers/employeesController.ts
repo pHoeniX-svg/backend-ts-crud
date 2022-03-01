@@ -1,6 +1,5 @@
 import { RequestHandler } from 'express';
 import { Employee } from '~server/model';
-import { IUser } from '~server/types';
 
 /**
  * @desc   Get All Employees
@@ -58,7 +57,7 @@ const createNewEmployee: RequestHandler = async (req: unknown, res) => {
       .json({ message: 'first and last names are required' });
   }
   try {
-    const result: Promise<IUser> = await Employee.create({
+    const result = await Employee.create({
       firstname: request.body.firstname,
       lastname: request.body.lastname,
     });

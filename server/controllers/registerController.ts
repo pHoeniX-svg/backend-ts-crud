@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 import { RequestHandler } from 'express';
 import { User } from '~server/model';
-import { IUser } from '~server/types';
 
 /**
  * @desc   Create A User
@@ -29,7 +28,7 @@ const handleRegisterNewUser: RequestHandler = async (req, res) => {
     const hashedPwd = await bcrypt.hash(pwd, 10);
 
     // create and store the new user
-    const result: Promise<IUser> = await User.create({
+    const result = await User.create({
       username: user,
       password: hashedPwd,
     });

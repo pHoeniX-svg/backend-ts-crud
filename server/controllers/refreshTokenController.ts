@@ -1,7 +1,6 @@
 import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 import { User } from '~server/model';
-import { IUser } from '~server/types';
 
 /**
  * @desc   Get Refresh Token
@@ -13,7 +12,7 @@ const handleRefreshToken: RequestHandler = async (req, res) => {
   if (!cookies?.jwt) return res.sendStatus(401); // unauthorized
   const refreshToken = cookies.jwt as string;
 
-  const foundUser: IUser = await User.findOne({ refreshToken }).exec();
+  const foundUser = await User.findOne({ refreshToken }).exec();
   if (!foundUser) {
     return res.sendStatus(403); // forbidden
   }

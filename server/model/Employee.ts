@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import { IEmployee } from './../types/index';
 const { Schema } = mongoose;
 
-const schema = new Schema({
+const schema = new Schema<IEmployee>({
   firstname: {
     type: String,
     required: true,
@@ -12,6 +13,6 @@ const schema = new Schema({
   },
 });
 
-const Employee = mongoose.model('Employee', schema);
+const Employee = mongoose.model<IEmployee>('Employee', schema);
 
 export { Employee };
