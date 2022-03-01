@@ -5,12 +5,13 @@ import { IUser } from '~server/types';
 /**
  * @desc   Get All Employees
  * @route  GET /api/employees
- * @access Private
+ * @access Public
  */
 const getAllEmployees: RequestHandler = async (_req, res) => {
   const employees = await Employee.find();
-  if (!employees)
+  if (!employees) {
     return res.status(204).json({ message: 'no employees found' });
+  }
   res.json(employees);
 };
 
