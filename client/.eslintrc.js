@@ -64,11 +64,11 @@ module.exports = {
         'newlines-between': 'never',
         groups: [
           'builtin', // Built-in types are first
+          ['external', 'internal'],
           ['sibling', 'parent'], // Then sibling and parent types. They can be mingled together
           'index', // Then the index file
           'object',
           // Then the rest: internal and external type
-          ['external', 'internal'],
         ],
       },
     ],

@@ -14,7 +14,7 @@
     "start": "ts-node -r tsconfig-paths/register ./server/index.ts",
     "server": "nodemon",
     "tsc:build": "tsc --project tsconfig.prod.json",
-    "client": "yarn workspace client start",
+    "client": "yarn --cwd client start",
     "heroku-postbuild": "YARN_PRODUCTION=false yarn --cwd client install && yarn --cwd client build"
   },
   "devDependencies": {
@@ -53,9 +53,5 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.2",
     "uuid": "^8.3.2"
-  },
-  "workspaces": [
-    "client",
-    "server"
-  ]
+  }
 }

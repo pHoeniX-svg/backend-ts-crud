@@ -6,6 +6,6 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 export default defineConfig({
   plugins: [react(), EnvironmentPlugin('all', { prefix: 'REACT_APP_' })],
   resolve: {
-    alias: [{ find: '~src', replacement: './src' }],
+    alias: [{ find: '~src', replacement: '/src/' }],
   },
 });
