@@ -2,7 +2,7 @@
   "name": "client",
   "version": "2.0.0",
   "private": true,
-  "main": "/client/src/index.tsx",
+  "main": "/src/main.tsx",
   "scripts": {
     "dev": "vite",
     "start": "vite",

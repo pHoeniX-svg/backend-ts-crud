@@ -1,4 +1,4 @@
-import { createContext, Dispatch, useContext, useState } from 'react';
+import { createContext, Dispatch, useState } from 'react';
 
 type AuthState = {
   user: string;
@@ -26,12 +26,4 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 
-function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error(`useAuth must be used within a AuthProvider`);
-  }
-  return context;
-}
-
-export { AuthProvider, useAuth };
+export { AuthProvider, AuthContext };

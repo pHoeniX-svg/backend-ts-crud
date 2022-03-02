@@ -1,13 +1,25 @@
 import { AxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from '~src/api/axios';
-import { useAuth } from '~src/context';
+import { useAuth } from '~src/hooks';
 import { FormEventType } from '~src/types';
 
 const LOGIN_URL = '/auth';
 
+type LocationProps = {
+  state: {
+    from: Location;
+  };
+};
+
 const Login = () => {
   const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation() as unknown as LocationProps;
+
+  const from = location.state?.from?.pathname || '/';
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
