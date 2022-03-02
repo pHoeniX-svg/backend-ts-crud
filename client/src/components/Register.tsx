@@ -50,8 +50,9 @@ const Register = () => {
         }
       );
       console.log(response.data);
-      console.log(JSON.stringify(response));
+
       setSuccess(true);
+      e.currentTarget.reset();
     } catch (error) {
       const e = error as AxiosError;
       if (!e?.response) {
