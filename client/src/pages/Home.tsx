@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '~src/hooks';
 
 const Home = () => {
+  const { logout } = useAuth();
+
   return (
     <section>
       <h1>Home</h1>
@@ -15,7 +18,7 @@ const Home = () => {
       <br />
       <Link to="/linkpage">Go to the link page</Link>
       <div className="flexGrow">
-        <button>Sign Out</button>
+        <button onClick={logout}>Sign Out</button>
       </div>
     </section>
   );

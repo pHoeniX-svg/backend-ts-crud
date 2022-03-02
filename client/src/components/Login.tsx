@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '~src/api/axios';
 import { useAuth } from '~src/hooks';
 import { FormEventType } from '~src/types';
@@ -27,7 +27,6 @@ const Login = () => {
   const [user, setUser] = useState('');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: FormEventType) => {
     e.preventDefault();
@@ -45,11 +44,14 @@ const Login = () => {
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
 
-      setAuth({ user, pwd, accessToken, roles });
-      setSuccess(true);
-      e.currentTarget.reset();
+      setAuth({ user, pwd, roles, accessToken });
+
+      setUser('');
+      setPwd('');
+      navigate(from, { replace: true });
     } catch (error) {
       const e = error as AxiosError;
+
       if (!e?.response) {
         setErrMsg('No Server Response');
       } else if (e?.response?.status === 400) {
@@ -59,6 +61,7 @@ const Login = () => {
       } else {
         setErrMsg('Login Failed: Unknown Error');
       }
+
       errRef?.current?.focus();
     }
   };
@@ -72,60 +75,47 @@ const Login = () => {
   }, [user, pwd]);
 
   return (
-    <>
-      {success ? (
-        <section>
-          <h1>You are logged in!</h1>
-          <br />
-          <p>
-            <a href="jdjdjd">Go to home</a>
-          </p>
-        </section>
-      ) : (
-        <section>
-          <p
-            ref={errRef}
-            aria-live="assertive"
-            className={errMsg ? 'errmsg' : 'offscreen'}
-          >
-            {errMsg}
-          </p>
-          <h1>Sign In</h1>
-          <form onSubmit={handleSubmit}>
-            {/* USERNAME */}
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              ref={userRef}
-              autoComplete="off"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-              required
-            />
-            {/* PASSWORD */}
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)}
-              // required
-            />
-            <button>Sign In</button>
-          </form>
-          <p>
-            Need an Account?
-            <br />
-            <span className="line">
-              {/*put router link here*/}
-              <a href="local">Sign Up</a>
-            </span>
-          </p>
-        </section>
-      )}
-    </>
+    <section>
+      <p
+        ref={errRef}
+        aria-live="assertive"
+        className={errMsg ? 'errmsg' : 'offscreen'}
+      >
+        {errMsg}
+      </p>
+      <h1>Sign In</h1>
+      <form onSubmit={handleSubmit}>
+        {/* USERNAME */}
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          ref={userRef}
+          autoComplete="off"
+          value={user}
+          onChange={(e) => setUser(e.target.value)}
+          required
+        />
+        {/* PASSWORD */}
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={pwd}
+          onChange={(e) => setPwd(e.target.value)}
+          required
+        />
+        <button>Sign In</button>
+      </form>
+      <p>
+        Need an Account?
+        <br />
+        <span className="line">
+          <Link to="/register">Go to home</Link>
+        </span>
+      </p>
+    </section>
   );
 };
 

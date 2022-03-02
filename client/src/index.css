@@ -70,6 +70,7 @@ button {
 
 button {
   padding: 1.1rem;
+  cursor: pointer;
 }
 
 .instructions {

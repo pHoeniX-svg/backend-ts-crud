@@ -4,6 +4,12 @@ import './index.css';
 import { Home, Missing } from './pages';
 import { Admin, Editor, LinkPage, Lounge, Unauthorized } from './views';
 
+enum ROLES {
+  User = 2001,
+  Editor = 1984,
+  Admin = 5150,
+}
+
 function App() {
   return (
     <Routes>
@@ -15,10 +21,20 @@ function App() {
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* protected routes */}
-        <Route element={<RequireAuth />}>
+        <Route element={<RequireAuth allowedRoles={[2001]} />}>
           <Route path="/" element={<Home />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
           <Route path="editor" element={<Editor />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="admin" element={<Admin />} />
+        </Route>
+        <Route
+          element={<RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />}
+        >
           <Route path="lounge" element={<Lounge />} />
         </Route>
 

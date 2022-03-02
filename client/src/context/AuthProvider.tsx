@@ -1,16 +1,20 @@
 import { createContext, Dispatch, useState } from 'react';
 
-type AuthState = {
+export type AuthState = {
   user: string;
   pwd: string;
   roles: number[];
   accessToken?: string;
+  // roles: [User?: 2001, Editor?: 1984, Admin?: 5150];
 };
+
 type AuthDispatch = Dispatch<React.SetStateAction<AuthState>>;
+
 type AuthContextProps = {
   auth: AuthState;
   setAuth: AuthDispatch;
 };
+
 type AuthProviderProps = { children: React.ReactNode };
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);

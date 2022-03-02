@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { FaCheck, FaInfoCircle, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import axios from '~src/api/axios';
 import { FormEventType } from '~src/types';
 
@@ -52,7 +53,11 @@ const Register = () => {
       console.log(response.data);
 
       setSuccess(true);
-      e.currentTarget.reset();
+
+      //clear state and controlled inputs
+      setUser('');
+      setPwd('');
+      setMatchPwd('');
     } catch (error) {
       const e = error as AxiosError;
       if (!e?.response) {
@@ -93,8 +98,7 @@ const Register = () => {
         <section className="success">
           <h1>Success!</h1>
           <p>
-            {' '}
-            <a href="http://localhost:3000">Sign In</a>
+            <Link to="/login">Sign In</Link>
           </p>
         </section>
       ) : (
@@ -218,8 +222,7 @@ const Register = () => {
             Already registered?
             <br />
             <span className="line">
-              {/*put router link here*/}
-              <a href="http://localhost:3000">Sign In</a>
+              <Link to="/login">Sign In</Link>
             </span>
           </p>
         </section>
