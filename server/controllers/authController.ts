@@ -46,6 +46,7 @@ const handleLogin: RequestHandler = async (req, res) => {
       { expiresIn: '1d' }
     );
 
+    // Saving refreshToken with current user
     foundUser.refreshToken = refreshToken;
     const result = await foundUser.save();
     console.log(result);

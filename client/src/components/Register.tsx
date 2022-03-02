@@ -41,16 +41,13 @@ const Register = () => {
     try {
       const response = await axios.post(
         REGISTER_URL,
-        JSON.stringify({
-          user,
-          pwd,
-        }),
+        JSON.stringify({ user, pwd }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
         }
       );
-      console.log(response.data);
+      console.log(JSON.stringify(response?.data));
 
       setSuccess(true);
 
