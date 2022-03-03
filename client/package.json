@@ -2,7 +2,7 @@
   "name": "client",
   "version": "2.0.0",
   "private": true,
-  "main": "/client/src/index.tsx",
+  "main": "/src/main.tsx",
   "scripts": {
     "dev": "vite",
     "start": "vite",
@@ -19,9 +19,11 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.4",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@types/styled-components": "^5.1.22",

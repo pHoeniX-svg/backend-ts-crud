@@ -70,6 +70,7 @@ button {
 
 button {
   padding: 1.1rem;
+  cursor: pointer;
 }
 
 .instructions {
@@ -115,4 +116,29 @@ button {
 
 .line {
   display: inline-block;
+}
+
+.flexGrow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.persistCheck {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: 1rem;
+  font-size: 1.65rem;
+}
+
+.persistCheck label {
+  margin: 0;
+}
+
+[type='checkbox'] {
+  height: 2rem;
+  width: 2rem;
+  margin: 0 5px 2px 2px;
 }
