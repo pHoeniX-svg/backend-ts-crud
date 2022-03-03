@@ -1,4 +1,5 @@
 import axios from '~src/api/axios';
+import { REFRESH_URL } from '~src/constants';
 import { useAuth } from '~src/hooks';
 
 const useRefreshToken = () => {
@@ -7,7 +8,8 @@ const useRefreshToken = () => {
   const refresh = async (): Promise<string> => {
     const response = await axios.get<{
       accessToken: string;
-    }>('/refresh', { withCredentials: true });
+      roles: number[];
+    }>(REFRESH_URL, { withCredentials: true });
 
     setAuth((prevState) => {
       console.log(JSON.stringify(prevState));
@@ -15,7 +17,8 @@ const useRefreshToken = () => {
 
       return {
         ...prevState,
-        accessToken: response?.data?.accessToken,
+        roles: response.data.roles,
+        accessToken: response.data.accessToken,
       };
     });
 

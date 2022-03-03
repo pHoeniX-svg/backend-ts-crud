@@ -2,10 +2,9 @@ import { AxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '~src/api/axios';
+import { LOGIN_URL } from '~src/constants';
 import { useAuth } from '~src/hooks';
 import { FormEventType } from '~src/types';
-
-const LOGIN_URL = '/auth';
 
 type LocationProps = {
   state: {
@@ -45,7 +44,6 @@ const Login = () => {
       const roles = response?.data?.roles;
 
       setAuth({ user, pwd, roles, accessToken });
-
       setUser('');
       setPwd('');
       navigate(from, { replace: true });
@@ -101,7 +99,7 @@ const Login = () => {
         <input
           type="password"
           id="password"
-          autoComplete="current-password"
+          autoComplete="off"
           value={pwd}
           onChange={(e) => setPwd(e.target.value)}
           required

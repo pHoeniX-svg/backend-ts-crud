@@ -10,8 +10,8 @@ import { useAuth } from './useAuth';
 import { useRefreshToken } from './useRefreshToken';
 
 export const useAxiosPrivate = (): AxiosInstance => {
-  const refresh = useRefreshToken();
   const { auth } = useAuth();
+  const refresh = useRefreshToken();
 
   useEffect(() => {
     /* REQUEST INTERCEPT: sets the access token to authorize */
@@ -33,16 +33,16 @@ export const useAxiosPrivate = (): AxiosInstance => {
       async (error: AxiosError) => {
         const prevRequest = error?.config as AxiosRequestConfig & {
           sent: boolean;
+          headers: {
+            Authorization: string;
+          };
         };
 
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
-
-          if (newAccessToken && prevRequest.headers) {
-            prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-            return axiosPrivate(prevRequest);
-          }
+          prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          return axiosPrivate(prevRequest);
         }
 
         return Promise.reject(error);

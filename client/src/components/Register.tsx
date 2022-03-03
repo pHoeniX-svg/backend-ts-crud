@@ -3,11 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { FaCheck, FaInfoCircle, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import axios from '~src/api/axios';
+import { PWD_REGEX, REGISTER_URL, USER_REGEX } from '~src/constants';
 import { FormEventType } from '~src/types';
-
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
 
 const Register = () => {
   const userRef = useRef<HTMLInputElement>(null);
@@ -81,8 +78,8 @@ const Register = () => {
     const isValidPwd = PWD_REGEX.test(pwd);
     setValidPwd(isValidPwd);
 
-    const match = pwd === matchPwd;
-    setValidMatchPwd(match);
+    const isMatch = pwd === matchPwd;
+    setValidMatchPwd(isMatch);
   }, [pwd, matchPwd]);
 
   useEffect(() => {
@@ -119,7 +116,7 @@ const Register = () => {
               type="text"
               id="username"
               ref={userRef}
-              autoComplete="name"
+              autoComplete=""
               aria-invalid={validName ? 'false' : 'true'}
               aria-describedby="uidnote"
               value={user}

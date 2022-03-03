@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,11 +20,10 @@ export const Users = () => {
         const response = await axiosPrivate.get('/users', {
           signal: controller.signal,
         });
-        console.log(response?.data);
-        isMounted && setUsers(response?.data);
+        console.log(response.data);
+        isMounted && setUsers(response.data);
       } catch (error) {
-        const e = error as AxiosError;
-        console.error(e);
+        console.error(error);
         navigate('/login', { state: { from: location }, replace: true });
       }
     };
@@ -36,7 +34,7 @@ export const Users = () => {
       isMounted = false;
       controller.abort();
     };
-  }, [axiosPrivate, location, navigate]);
+  }, []);
 
   return (
     <article>
