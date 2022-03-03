@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useDebugValue } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext, AuthState } from '~src/context';
 
@@ -9,6 +9,7 @@ function useAuth() {
   }
 
   const { auth, setAuth } = context;
+  useDebugValue(auth, (auth) => (auth?.user ? 'Logged In' : 'Logged Out'));
 
   const navigate = useNavigate();
 

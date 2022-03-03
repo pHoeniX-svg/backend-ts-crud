@@ -6,7 +6,7 @@ const handleLogout: RequestHandler = async (req, res) => {
 
   const cookies = req.cookies;
 
-  if (!cookies?.jwt) return res.sendStatus(204); // successful but no content: ;
+  if (!cookies?.jwt) return res.sendStatus(204); // successful but no content
   const refreshToken = cookies.jwt as string;
 
   // is refresh token in db?
