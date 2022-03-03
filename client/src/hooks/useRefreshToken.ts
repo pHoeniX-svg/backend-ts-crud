@@ -4,7 +4,7 @@ import { useAuth } from '~src/hooks';
 const useRefreshToken = () => {
   const { setAuth } = useAuth();
 
-  const refresh = async () => {
+  const refresh = async (): Promise<string> => {
     const response = await axios.get<{
       accessToken: string;
     }>('/refresh', { withCredentials: true });
@@ -12,6 +12,7 @@ const useRefreshToken = () => {
     setAuth((prevState) => {
       console.log(JSON.stringify(prevState));
       console.log(response?.data?.accessToken);
+
       return {
         ...prevState,
         accessToken: response?.data?.accessToken,

@@ -13,7 +13,11 @@ const handleLogout: RequestHandler = async (req, res) => {
   const foundUser = await User.findOne({ refreshToken }).exec();
 
   if (!foundUser) {
-    res.clearCookie('jwt', { httpOnly: true, sameSite: 'none', secure: true });
+    res.clearCookie('jwt', {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: process.env.NODE_ENV === 'production',
+    });
     return res.sendStatus(204); // successful but no content
   }
 
@@ -27,10 +31,10 @@ const handleLogout: RequestHandler = async (req, res) => {
   res.clearCookie('jwt', {
     httpOnly: true,
     sameSite: 'none',
-    // secure: true,
+    secure: process.env.NODE_ENV === 'production',
   });
 
-  return res.sendStatus(204); // successful but no content
+  res.sendStatus(204); // successful but no content
 };
 
 export { handleLogout };

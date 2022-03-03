@@ -21,7 +21,6 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [auth, setAuth] = useState<AuthState>({} as AuthState);
-  if (auth) console.log(auth);
 
   // const value = useMemo(() => [auth, setAuth], [auth]);
 

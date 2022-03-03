@@ -1,11 +1,16 @@
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import axios from '~src/api/axios';
+import { useAxiosPrivate } from '~src/hooks';
 import { IUser } from '~src/types';
 
 export const Users = () => {
   const [users, setUsers] = useState<IUser[]>([]);
+  const axiosPrivate = useAxiosPrivate();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
@@ -13,7 +18,7 @@ export const Users = () => {
 
     const getUsers = async () => {
       try {
-        const response = await axios.get('/users', {
+        const response = await axiosPrivate.get('/users', {
           signal: controller.signal,
         });
         console.log(response?.data);
@@ -21,6 +26,7 @@ export const Users = () => {
       } catch (error) {
         const e = error as AxiosError;
         console.error(e);
+        navigate('/login', { state: { from: location }, replace: true });
       }
     };
 
@@ -30,7 +36,7 @@ export const Users = () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [axiosPrivate, location, navigate]);
 
   return (
     <article>
