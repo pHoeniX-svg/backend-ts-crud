@@ -66,6 +66,8 @@ mongoose.connection.once('open', () => {
   console.log(
     `Connected to MongoDB: ${mongoose.connection.host}`.cyan.underline
   );
+  console.log(`NODE_ENV=${process.env.NODE_ENV}`.yellow.bold);
+
   app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
   });

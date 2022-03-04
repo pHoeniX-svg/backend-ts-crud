@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '~src/api/axios';
 import { LOGIN_URL } from '~src/constants';
-import { useAuth } from '~src/hooks';
+import { useAuth, useInput, useToggle } from '~src/hooks';
 import { FormEventType } from '~src/types';
 
 type LocationProps = {
@@ -23,9 +23,10 @@ const Login = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
-  const [user, setUser] = useState('');
-  const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [user, resetUser, userAttributes] = useInput('user', '');
+  const [check, toggleCheck] = useToggle('persist', false);
 
   const handleSubmit = async (e: FormEventType) => {
     e.preventDefault();
@@ -44,7 +45,7 @@ const Login = () => {
       const roles = response?.data?.roles;
 
       setAuth({ user, pwd, roles, accessToken });
-      setUser('');
+      resetUser();
       setPwd('');
       navigate(from, { replace: true });
     } catch (error) {
@@ -72,6 +73,13 @@ const Login = () => {
     setErrMsg('');
   }, [user, pwd]);
 
+  // const togglePersist = () => {
+  //   setPersist((prev) => !prev);
+  // };
+  // useEffect(() => {
+  //   localStorage.setItem('persist', persist as unknown as string);
+  // }, [persist]);
+
   return (
     <section>
       <p
@@ -90,8 +98,7 @@ const Login = () => {
           id="username"
           ref={userRef}
           autoComplete="off"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
+          {...userAttributes}
           required
         />
         {/* PASSWORD */}
@@ -105,6 +112,16 @@ const Login = () => {
           required
         />
         <button>Sign In</button>
+        <div className="persistCheck">
+          <input
+            type="checkbox"
+            name="persist"
+            id="persist"
+            checked={check}
+            onChange={() => toggleCheck(check)}
+          />
+          <label htmlFor="persist">Trust This Device</label>
+        </div>
       </form>
       <p>
         Need an Account?
