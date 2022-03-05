@@ -22,6 +22,7 @@ app.use(logger);
 // and fetch cookies credentials requirement
 app.use(credentials);
 
+// Cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
 // built-in middleware to handle urlencoded form data:
@@ -37,7 +38,7 @@ app.use(cookieParser());
 // serve static files from the public directory
 app.use('/', express.static(path.join(__dirname, '/public')));
 
-// routes => maybe change to /api/*
+// routes
 app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));

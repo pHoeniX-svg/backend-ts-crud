@@ -3,7 +3,7 @@ import { User } from '~server/model';
 
 /**
  * @desc   Get All Users
- * @route  GET /api/users
+ * @route  GET /users
  * @access Private
  */
 const getAllUsers: RequestHandler = async (_req, res) => {
@@ -14,7 +14,7 @@ const getAllUsers: RequestHandler = async (_req, res) => {
 
 /**
  * @desc   Get Single User
- * @route  GET /api/users/:id
+ * @route  GET /users/:id
  * @access Private
  */
 const getUser: RequestHandler = async (req, res) => {
@@ -41,7 +41,7 @@ const getUser: RequestHandler = async (req, res) => {
 
 /**
  * @desc   Delete A User
- * @route  DELETE /api/users/:id
+ * @route  DELETE /users/:id
  * @access Private
  */
 // NOTE: remember request.body?.id or request.params?.id

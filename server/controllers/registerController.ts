@@ -4,7 +4,7 @@ import { User } from '~server/model';
 
 /**
  * @desc   Create A User
- * @route  POST /api/register
+ * @route  POST /register
  * @access Public
  */
 const handleRegisterNewUser: RequestHandler = async (req, res) => {
@@ -16,7 +16,7 @@ const handleRegisterNewUser: RequestHandler = async (req, res) => {
       .json({ message: 'username and password are required' });
   }
 
-  //check for duplicate usernames in db
+  // check for duplicate usernames in the db
   const duplicate = await User.findOne({ username: user }).exec();
 
   if (duplicate) {
@@ -25,7 +25,7 @@ const handleRegisterNewUser: RequestHandler = async (req, res) => {
 
   try {
     // encrypt the password
-    const hashedPwd = await bcrypt.hash(pwd, 10);
+    const hashedPwd = await bcrypt.hash(pwd, 16);
 
     // create and store the new user
     const result = await User.create({

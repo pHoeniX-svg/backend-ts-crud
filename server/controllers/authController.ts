@@ -5,7 +5,7 @@ import { User } from '~server/model';
 
 /**
  * @desc   Authenticate A User
- * @route  POST /api/auth
+ * @route  POST /auth
  * @access Public
  */
 const handleLogin: RequestHandler = async (req, res) => {

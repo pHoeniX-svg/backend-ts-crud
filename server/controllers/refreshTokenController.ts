@@ -4,7 +4,7 @@ import { User } from '~server/model';
 
 /**
  * @desc   Get Refresh Token
- * @route  GET /api/refresh
+ * @route  GET /refresh
  * @access Private
  */
 const handleRefreshToken: RequestHandler = async (req, res) => {
