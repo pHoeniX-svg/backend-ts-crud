@@ -26,7 +26,7 @@ function App() {
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
-        {/* protected routes */}
+        {/* we want to protect these routes */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/" element={<Home />} />
@@ -39,6 +39,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
             <Route path="admin" element={<Admin />} />
           </Route>
+
           <Route
             element={<RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />}
           >

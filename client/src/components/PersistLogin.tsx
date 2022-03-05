@@ -4,17 +4,18 @@ import { useAuth, useLocalStorage, useRefreshToken } from '~src/hooks';
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const refresh = useRefreshToken();
   const { auth } = useAuth();
   const [persist] = useLocalStorage('persist', false);
-  const refresh = useRefreshToken();
 
   useEffect(() => {
     let isMounted = true;
+
     const verifyRefreshToken = async () => {
       try {
         await refresh();
-      } catch (error) {
-        console.error(error);
+      } catch (err) {
+        console.error(err);
       } finally {
         isMounted && setIsLoading(false);
       }
@@ -29,11 +30,11 @@ const PersistLogin = () => {
 
   useEffect(() => {
     console.log(`isLoading: ${isLoading}`);
-    console.log(`AT: ${JSON.stringify(auth?.accessToken)}`);
+    console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
   }, [auth?.accessToken, isLoading]);
 
   return (
-    <>{!persist ? <Outlet /> : isLoading ? <p>Loading..</p> : <Outlet />}</>
+    <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
   );
 };
 

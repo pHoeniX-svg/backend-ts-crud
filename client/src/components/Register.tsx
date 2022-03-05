@@ -28,13 +28,15 @@ const Register = () => {
   const handleSubmit = async (e: FormEventType) => {
     e.preventDefault();
 
-    //if btn is enabled with JS hack
+    // if button is enabled with JS hack
     const v1 = USER_REGEX.test(user);
     const v2 = PWD_REGEX.test(pwd);
+
     if (!v1 || !v2) {
-      setErrMsg('invalid user or password');
+      setErrMsg('Invalid Entry');
       return;
     }
+
     try {
       const response = await axios.post(
         REGISTER_URL,
@@ -44,11 +46,10 @@ const Register = () => {
           withCredentials: true,
         }
       );
+      // TODO: remove console.logs before deployment
       console.log(JSON.stringify(response?.data));
-
       setSuccess(true);
-
-      //clear state and controlled inputs
+      // clear state and controlled inputs
       setUser('');
       setPwd('');
       setMatchPwd('');

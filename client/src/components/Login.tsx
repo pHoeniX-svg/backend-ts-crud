@@ -23,9 +23,9 @@ const Login = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
-  const [errMsg, setErrMsg] = useState('');
+  const [user, resetUser, userAttribs] = useInput('user', '');
   const [pwd, setPwd] = useState('');
-  const [user, resetUser, userAttributes] = useInput('user', '');
+  const [errMsg, setErrMsg] = useState('');
   const [check, toggleCheck] = useToggle('persist', false);
 
   const handleSubmit = async (e: FormEventType) => {
@@ -40,10 +40,8 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-
       setAuth({ user, pwd, roles, accessToken });
       resetUser();
       setPwd('');
@@ -73,13 +71,6 @@ const Login = () => {
     setErrMsg('');
   }, [user, pwd]);
 
-  // const togglePersist = () => {
-  //   setPersist((prev) => !prev);
-  // };
-  // useEffect(() => {
-  //   localStorage.setItem('persist', persist as unknown as string);
-  // }, [persist]);
-
   return (
     <section>
       <p
@@ -98,7 +89,7 @@ const Login = () => {
           id="username"
           ref={userRef}
           autoComplete="off"
-          {...userAttributes}
+          {...userAttribs}
           required
         />
         {/* PASSWORD */}
