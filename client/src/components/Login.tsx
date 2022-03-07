@@ -109,7 +109,7 @@ const Login = () => {
             name="persist"
             id="persist"
             checked={check}
-            onChange={() => toggleCheck(check)}
+            onChange={() => toggleCheck()}
           />
           <label htmlFor="persist">Trust This Device</label>
         </div>

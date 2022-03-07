@@ -21,22 +21,15 @@ const getLocalValue = <T>(key: string, initialValue?: T): T => {
 };
 
 const useLocalStorage = <T>(key: string, initialValue?: T): ReturnType<T> => {
-  const [state, setState] = useState<T>(() => {
+  const [value, setValue] = useState(() => {
     return getLocalValue(key, initialValue);
   });
 
   useEffect(() => {
-    if (state) {
-      try {
-        localStorage.setItem(key, JSON.stringify(state));
-      } catch (error) {
-        const e = error as Error;
-        console.warn(`Error: Setting localStorage key “${key}”:`, e);
-      }
-    }
-  }, [state, key]);
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
 
-  return [state, setState];
+  return [value, setValue];
 };
 
 export { useLocalStorage };
