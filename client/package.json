@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "main": "/src/main.tsx",
+  "proxy": "http://127.0.0.1:3500",
   "scripts": {
     "dev": "vite",
     "start": "vite",

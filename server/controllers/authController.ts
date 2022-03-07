@@ -35,7 +35,7 @@ const handleLogin: RequestHandler = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET!,
-      { expiresIn: '60s' }
+      { expiresIn: '120s' }
     );
 
     const refreshToken = jwt.sign(
@@ -52,7 +52,7 @@ const handleLogin: RequestHandler = async (req, res) => {
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
 

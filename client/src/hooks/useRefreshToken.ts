@@ -10,6 +10,7 @@ const useRefreshToken = () => {
       accessToken: string;
       roles: number[];
     }>(REFRESH_URL, {
+      headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     });
 

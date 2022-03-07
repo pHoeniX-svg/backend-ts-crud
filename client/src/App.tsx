@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import {
+  Jokes,
   Layout,
   Login,
   PersistLogin,
@@ -30,6 +31,7 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/" element={<Home />} />
+            <Route path="jokes" element={<Jokes />} />
           </Route>
 
           <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>

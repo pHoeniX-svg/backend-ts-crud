@@ -1,4 +1,6 @@
 export * from './useAuth';
+export * from './useAxios';
+export * from './useAxiosFunction';
 export * from './useAxiosPrivate';
 export * from './useInput';
 export * from './useLocalStorage';

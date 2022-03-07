@@ -26,7 +26,7 @@ const Login = () => {
   const [user, resetUser, userAttribs] = useInput('user', '');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
-  const [check, toggleCheck] = useToggle('persist', false);
+  const [persist, togglePersist] = useToggle('persist', false);
 
   const handleSubmit = async (e: FormEventType) => {
     e.preventDefault();
@@ -108,8 +108,8 @@ const Login = () => {
             type="checkbox"
             name="persist"
             id="persist"
-            checked={check}
-            onChange={() => toggleCheck()}
+            checked={persist}
+            onChange={() => togglePersist()}
           />
           <label htmlFor="persist">Trust This Device</label>
         </div>
