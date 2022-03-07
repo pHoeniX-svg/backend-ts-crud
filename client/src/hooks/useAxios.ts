@@ -39,7 +39,7 @@ const useAxios = <T>(configObj: TConfig): HookReturnType<T> => {
         setResponse(result.data);
       } catch (error) {
         const e = error as AxiosError;
-        console.log(e.message);
+        console.error(e.message);
         setError(e.message);
       } finally {
         setLoading(false);

@@ -24,7 +24,6 @@ const handleLogout: RequestHandler = async (req, res) => {
   // delete refresh token from db
   foundUser.refreshToken = '';
   const result = await foundUser.save();
-  console.log(result);
 
   // in production, this should be set to secure: true
   // since the refresh token is sent over the https network

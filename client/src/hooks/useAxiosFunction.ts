@@ -6,7 +6,12 @@ import {
 } from 'axios';
 import { useEffect, useState } from 'react';
 
-type HookReturnType<T> = [T, string, boolean, () => void];
+type HookReturnType<T> = [
+  T,
+  string,
+  boolean,
+  (configObj: TConfig) => Promise<void>
+];
 
 type TConfig = {
   axiosInstance: AxiosInstance;
@@ -15,46 +20,43 @@ type TConfig = {
   requestConfig: AxiosRequestConfig;
 };
 
-const useAxiosFunction = <T>(configObj: TConfig): HookReturnType<T> => {
-  const { axiosInstance, url, requestConfig = {} } = configObj;
+const useAxiosFunction = <T>(): HookReturnType<T> => {
   const [response, setResponse] = useState<T>([] as unknown as T);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [reload, setReload] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [controller, setController] = useState<AbortController>();
 
-  const refetch = () => {
-    setReload((prev) => prev + 1);
+  const axiosFetch = async (configObj: TConfig) => {
+    const { axiosInstance, url, requestConfig = {} } = configObj;
+    try {
+      setLoading(true);
+      const ctrl = new AbortController();
+      setController(ctrl);
+      const result: AxiosResponse = await axiosInstance(url, {
+        ...requestConfig,
+        signal: ctrl.signal,
+      });
+      console.log(result);
+      setResponse(result.data);
+    } catch (error) {
+      const e = error as AxiosError;
+      console.error(e.message);
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchData = async () => {
-      try {
-        const result: AxiosResponse = await axiosInstance(url, {
-          ...requestConfig,
-          signal: controller.signal,
-        });
-        console.log(result);
-        setResponse(result.data);
-      } catch (error) {
-        const e = error as AxiosError;
-        console.log(e.message);
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    console.log(controller);
 
     return () => {
-      controller.abort();
+      controller?.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reload]);
+  }, [controller]);
 
-  return [response, error, loading, refetch];
+  return [response, error, loading, axiosFetch];
 };
 
 export { useAxiosFunction };

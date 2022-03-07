@@ -33,8 +33,6 @@ const handleRegisterNewUser: RequestHandler = async (req, res) => {
       password: hashedPwd,
     });
 
-    console.log(result);
-
     res.status(201).json({ success: `new user ${user} created!` });
   } catch (error) {
     let err = error as Error;

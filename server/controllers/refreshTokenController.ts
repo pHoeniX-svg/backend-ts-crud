@@ -11,7 +11,6 @@ const handleRefreshToken: RequestHandler = async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(401); // unauthorized
   const refreshToken = cookies.jwt as string;
-  console.log('RT', refreshToken);
 
   const foundUser = await User.findOne({ refreshToken }).exec();
   if (!foundUser) {
@@ -41,7 +40,6 @@ const handleRefreshToken: RequestHandler = async (req, res) => {
         process.env.ACCESS_TOKEN_SECRET!,
         { expiresIn: '120s' }
       );
-      console.log('AT', accessToken);
 
       res.json({ roles, accessToken });
     }

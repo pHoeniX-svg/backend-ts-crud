@@ -26,11 +26,13 @@ const PersistLogin = () => {
     return () => {
       isMounted = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     console.log(`isLoading: ${isLoading}`);
     console.log(`Access Token: ${JSON.stringify(auth?.accessToken)}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (

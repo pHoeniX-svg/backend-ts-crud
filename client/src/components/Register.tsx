@@ -46,10 +46,7 @@ const Register = () => {
           withCredentials: true,
         }
       );
-      // TODO: remove console.logs before deployment
-      console.log(JSON.stringify(response?.data));
       setSuccess(true);
-      // clear state and controlled inputs
       setUser('');
       setPwd('');
       setMatchPwd('');
