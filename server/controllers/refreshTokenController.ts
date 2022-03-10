@@ -4,7 +4,7 @@ import { User } from '~server/model';
 
 /**
  * @desc   Get Refresh Token
- * @route  GET /api/refresh
+ * @route  GET /refresh
  * @access Private
  */
 const handleRefreshToken: RequestHandler = async (req, res) => {
@@ -38,10 +38,10 @@ const handleRefreshToken: RequestHandler = async (req, res) => {
           },
         },
         process.env.ACCESS_TOKEN_SECRET!,
-        { expiresIn: '10s' }
+        { expiresIn: '120s' }
       );
 
-      res.json({ accessToken });
+      res.json({ roles, accessToken });
     }
   );
 };

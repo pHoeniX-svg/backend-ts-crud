@@ -5,7 +5,7 @@ import { User } from '~server/model';
 
 /**
  * @desc   Authenticate A User
- * @route  POST /api/auth
+ * @route  POST /auth
  * @access Public
  */
 const handleLogin: RequestHandler = async (req, res) => {
@@ -35,24 +35,23 @@ const handleLogin: RequestHandler = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET!,
-      { expiresIn: '10s' }
+      { expiresIn: '120s' }
     );
 
     const refreshToken = jwt.sign(
       { username: foundUser.username },
       process.env.REFRESH_TOKEN_SECRET!,
-      { expiresIn: '15s' }
+      { expiresIn: '1d' }
     );
 
     // Saving refreshToken with current user
     foundUser.refreshToken = refreshToken;
     const result = await foundUser.save();
-    console.log(result);
 
     res.cookie('jwt', refreshToken, {
       httpOnly: true,
       sameSite: 'none',
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
 

@@ -22,6 +22,7 @@ app.use(logger);
 // and fetch cookies credentials requirement
 app.use(credentials);
 
+// Cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
 // built-in middleware to handle urlencoded form data:
@@ -34,11 +35,16 @@ app.use(express.json());
 // middleware for cookies
 app.use(cookieParser());
 
-// serve static files from the public directory
-app.use('/', express.static(path.join(__dirname, '/public')));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+  });
+} else {
+  // serve static files from the public directory
+  app.use('/', express.static(path.join(__dirname, '/public')));
+}
 
-// routes => maybe change to /api/*
-app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
@@ -66,6 +72,8 @@ mongoose.connection.once('open', () => {
   console.log(
     `Connected to MongoDB: ${mongoose.connection.host}`.cyan.underline
   );
+  console.log(`NODE_ENV=${process.env.NODE_ENV}`.yellow.bold);
+
   app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
   });

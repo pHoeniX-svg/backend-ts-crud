@@ -47,7 +47,6 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:jsx-a11y/recommended',
-    'plugin:eslint-comments/recommended',
     'plugin:prettier/recommended',
   ],
   rules: {

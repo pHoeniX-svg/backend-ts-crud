@@ -16,7 +16,7 @@ const handleLogout: RequestHandler = async (req, res) => {
     res.clearCookie('jwt', {
       httpOnly: true,
       sameSite: 'none',
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
     });
     return res.sendStatus(204); // successful but no content
   }
@@ -24,14 +24,13 @@ const handleLogout: RequestHandler = async (req, res) => {
   // delete refresh token from db
   foundUser.refreshToken = '';
   const result = await foundUser.save();
-  console.log(result);
 
   // in production, this should be set to secure: true
   // since the refresh token is sent over the https network
   res.clearCookie('jwt', {
     httpOnly: true,
     sameSite: 'none',
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
   });
 
   res.sendStatus(204); // successful but no content

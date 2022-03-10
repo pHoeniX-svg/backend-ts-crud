@@ -3,7 +3,7 @@ import { Employee } from '~server/model';
 
 /**
  * @desc   Get All Employees
- * @route  GET /api/employees
+ * @route  GET /employees
  * @access Public
  */
 const getAllEmployees: RequestHandler = async (_req, res) => {
@@ -16,7 +16,7 @@ const getAllEmployees: RequestHandler = async (_req, res) => {
 
 /**
  * @desc   Get Single Employee
- * @route  GET /api/employees/:id
+ * @route  GET /employees/:id
  * @access Private
  */
 const getEmployee: RequestHandler = async (req, res) => {
@@ -43,7 +43,7 @@ const getEmployee: RequestHandler = async (req, res) => {
 
 /**
  * @desc   Create An Employee
- * @route  POST /api/employees/
+ * @route  POST /employees/
  * @access Private
  */
 const createNewEmployee: RequestHandler = async (req: unknown, res) => {
@@ -70,7 +70,7 @@ const createNewEmployee: RequestHandler = async (req: unknown, res) => {
 
 /**
  * @desc   Update An Employee
- * @route  PUT /api/employees/
+ * @route  PUT /employees/
  * @access Private
  */
 const updateEmployee: RequestHandler = async (req: unknown, res) => {
@@ -106,7 +106,7 @@ const updateEmployee: RequestHandler = async (req: unknown, res) => {
 
 /**
  * @desc   Delete An Employee
- * @route  DELETE /api/employees/
+ * @route  DELETE /employees/
  * @access Private
  */
 const deleteEmployee: RequestHandler = async (req, res) => {

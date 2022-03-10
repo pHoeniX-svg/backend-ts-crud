@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '~src/api/axios';
 import { LOGIN_URL } from '~src/constants';
-import { useAuth } from '~src/hooks';
+import { useAuth, useInput, useToggle } from '~src/hooks';
 import { FormEventType } from '~src/types';
 
 type LocationProps = {
@@ -23,9 +23,10 @@ const Login = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement | null>(null);
 
-  const [user, setUser] = useState('');
+  const [user, resetUser, userAttribs] = useInput('user', '');
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
+  const [persist, togglePersist] = useToggle('persist', false);
 
   const handleSubmit = async (e: FormEventType) => {
     e.preventDefault();
@@ -39,12 +40,10 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-
       setAuth({ user, pwd, roles, accessToken });
-      setUser('');
+      resetUser();
       setPwd('');
       navigate(from, { replace: true });
     } catch (error) {
@@ -90,8 +89,7 @@ const Login = () => {
           id="username"
           ref={userRef}
           autoComplete="off"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
+          {...userAttribs}
           required
         />
         {/* PASSWORD */}
@@ -105,6 +103,16 @@ const Login = () => {
           required
         />
         <button>Sign In</button>
+        <div className="persistCheck">
+          <input
+            type="checkbox"
+            name="persist"
+            id="persist"
+            checked={persist}
+            onChange={() => togglePersist()}
+          />
+          <label htmlFor="persist">Trust This Device</label>
+        </div>
       </form>
       <p>
         Need an Account?
