@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:3500';
+const BASE_URL = 'http://localhost:3500';
 const JOKES_URL = 'https://icanhazdadjoke.com';
 const JSPH_URL = 'https://jsonplaceholder.typicode.com';
 

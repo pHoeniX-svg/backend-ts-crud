@@ -22,6 +22,10 @@ const Home = () => {
       <br />
       <Link to="/lounge">Go to the Lounge</Link>
       <br />
+      <Link to="/posts">Stay up to date</Link>
+      <br />
+      <Link to="/jokes">Have some fun</Link>
+      <br />
       <Link to="/linkpage">Go to the link page</Link>
       <div className="flexGrow">
         <button onClick={signOut}>Sign Out</button>

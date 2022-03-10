@@ -38,7 +38,7 @@ export const Users = () => {
       <h2>Users List</h2>
       {users?.length ? (
         <ul>
-          {users.map((user, i) => (
+          {users?.map((user, i) => (
             <li key={i}>{user?.username}</li>
           ))}
         </ul>

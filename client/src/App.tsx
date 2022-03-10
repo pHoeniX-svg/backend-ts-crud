@@ -4,6 +4,7 @@ import {
   Layout,
   Login,
   PersistLogin,
+  Posts,
   Register,
   RequireAuth,
 } from './components';
@@ -32,6 +33,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/" element={<Home />} />
             <Route path="jokes" element={<Jokes />} />
+            <Route path="posts" element={<Posts />} />
           </Route>
 
           <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>

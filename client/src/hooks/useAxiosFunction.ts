@@ -17,14 +17,16 @@ type TConfig = {
   axiosInstance: AxiosInstance;
   method: string;
   url: string;
-  requestConfig: AxiosRequestConfig;
+  requestConfig?: AxiosRequestConfig;
 };
 
 const useAxiosFunction = <T>(): HookReturnType<T> => {
   const [response, setResponse] = useState<T>([] as unknown as T);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [controller, setController] = useState<AbortController>();
+  const [controller, setController] = useState<AbortController | undefined>(
+    undefined
+  );
 
   const axiosFetch = async (configObj: TConfig) => {
     const { axiosInstance, url, requestConfig = {} } = configObj;
